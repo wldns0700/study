@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<script>
+var xhr = new XMLHttpRequest();
+var url = 'https://cors-anywhere.herokuapp.com/http://ws.bus.go.kr/api/rest/arrive/getArrInfoByRouteAll'; /*URL*/
+var queryParams = '?' + encodeURIComponent('serviceKey') + '='+'qpUd12T1%2FD7jrYvoAMBNZowmsKD9WqffEjj%2B0lRdUe4meLLnMFPBobj%2FMhHXXAqwRtLTh52POqkT9tR7vd5Hbw%3D%3D'; /*Service Key*/
+queryParams += '&' + encodeURIComponent('busRouteId') + '=' + encodeURIComponent('100100118'); /**/
+xhr.open('GET', url + queryParams);
+xhr.onreadystatechange = function () {
+    if (this.readyState == 4) {
+        //alert('Status: '+this.status+'nHeaders: '+JSON.stringify(this.getAllResponseHeaders())+'nBody: '+this.responseText);
+    	document.querySelector("div").innerHTML=this.responseText
+    }
+};
+
+xhr.send('');
+</script>
+
+
+<body>
+<div></div>
+
+</body>
+</html>
