@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+<bean id = "sungjk1" class="springbasic.sungjuk"></bean>
+<bean id = "sungjuk2" class="springbasic.sungjuk">
+<constructor-arg value="100"></constructor-arg>
+<constructor-arg value="90"></constructor-arg>
+<constructor-arg value="80"></constructor-arg>
+</bean>
+<!-- 위 코드에 대한 문제점:순차적으로 값을 입력해야 한다는 단점 -->
+<bean id="sungjuk3" class="springbasic.sungjuk">
+<property name="kor" value="100"></property>
+<property name="eng" value="100"></property>
+<property name="math" value="100"></property>
+</bean>
+<!-- 위의 코드를 작성하면 오류 발생/발생 원인은 name은 set 함수를 찾는다  -->
+<!-- id는 객채의 변수명, name는 set함수를 가르킨다. -->
+</beans>
+
+
+Spirng xml 기본
