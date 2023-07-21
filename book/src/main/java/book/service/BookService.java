@@ -1,41 +1,53 @@
 package book.service;
 
+
+
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import book.dao.BookDAO;
+
+import book.dao.BookMapperser;
+import book.dao.JdbcTempDAO;
 import book.dao.OracleBookDAO;
 import book.vo.BookVO;
+import mapper.BookMapper;
 
-@Service
-public class BookService {
+public class BookService implements BookMapperser{
 	
-	@Autowired
-	OracleBookDAO dao;
 
-	public int insert(BookVO bookVO) {
-		return dao.insert(bookVO);
+	BookMapper mapper;
+
+
+	public int insert(@Param("book")BookVO book) {
+		int result = mapper.insert(book);
+		return result;
 	}
+
 
 	public List<BookVO> findAll() {
-		return dao.findAll();
+		List<BookVO> list = mapper.findAll();
+		return list;
 	}
 
-	public BookVO findOne(int idx) {
+
+	public BookVO findOneById(int idx) {
 		
-		return dao.findOneById(idx);
+		return mapper.findOne(idx);
 	}
 
-	public int update(int idx,BookVO bookVO) {
-		
-		return dao.update(idx,bookVO);
+	public int update(int idx, @Param("book")BookVO book) {
+		int result = mapper.update(idx,book);
+		return result;
 	}
 
-	public int del(int idx) {
-		
-		return dao.delete(idx);
+
+	public int delete(int idx) {
+		int result = mapper.delete(idx);
+		return result;
 	}
+
 	
 }

@@ -2,7 +2,9 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:context="http://www.springframework.org/schema/context"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+	xsi:schemaLocation="http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 
 <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -10,6 +12,26 @@
 <property name="suffix" value=".jsp"/>
 </bean>
 
-<context:component-scan base-package="book.controller,book.service,book.dao"></context:component-scan>
+<context:component-scan base-package="book.controller,book.service,book.dao,mapper"></context:component-scan>
+<bean id="hikariconfig" class="com.zaxxer.hikari.HikariConfig">
+<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
+<property name="jdbcUrl" value="jdbc:oracle:thin:@localhost:1521:xe"/>
+<property name="username" value="system"/>
+<property name="password" value="1234"/>
+</bean>
+<bean id="ds" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
+<constructor-arg ref="hikariconfig"></constructor-arg>
+</bean>
+<!-- datasource는 데이터베이스 접속관련사항 -->
+<!-- datasource를 이용해 스프링에서 지원하는 jdbcTemplate를 이용해 sql처리 -->
+
+<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+<property name="dataSource" ref="ds"></property>
+
+
+</bean>
+<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+    <property name="basePackage" value="mapper"/>
+</bean>
 
 </beans>

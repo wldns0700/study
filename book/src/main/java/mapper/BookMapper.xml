@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.BookMapper">
+<insert id="insert">
+insert into book values(book_idx_seq.nextval,#{book.title},#{book.content},#{book.price})
+
+</insert>
+<select id="findAll" resultType="book.vo.BookVO">
+select *from book
+</select>
+
+<select id="findOne" resultType="book.vo.BookVO">
+select *from book where idx=#{idx}
+</select>
+
+<update id="update" parameterType ="book.vo.BookVO">
+    update book set title=#{book.title}, content=#{book.content}, price=#{book.price} where idx=#{idx}
+</update>
+
+
+<delete id="delete">
+delete book where idx=${idx}
+</delete>
+</mapper>

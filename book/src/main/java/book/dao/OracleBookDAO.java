@@ -11,8 +11,8 @@ import org.springframework.stereotype.Repository;
 
 import book.vo.BookVO;
 
-@Repository
-public class OracleBookDAO implements BookDAO{
+
+public class OracleBookDAO implements BookMapperser{
 
 	Connection conn;
 	
