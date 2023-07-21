@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
+<bean id="aprint" class="aop1.Aprint"/>
+<bean id="aspect" class="aop1.Aspect"/>
+<aop:config>
+<!-- 앞뒤에 코드가 처리된 클래스를 지정(aspect) -->
+<aop:aspect id="as" ref="aspect">
+<!-- aspect Object obj=joinpoint.proceed(); 함수를 지정 -->
+<aop:pointcut expression="execution(public void aop1.Aprint.*())" id="a"/>
+<!-- aspect 에서 실행할 함수를 지정-->
+<aop:around pointcut-ref="a" method="frontEndFunc"/>
+</aop:aspect>
+</aop:config>
+
+</beans>

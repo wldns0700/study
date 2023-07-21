@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
+<bean id="aprint" class="aop2.Aprint"/>
+<bean id="advice" class="aop2.Advice"/>
+
+<aop:config>
+<aop:aspect ref="advice">
+<aop:pointcut expression="execution(public void aop2.*.*())" id="pointcut"/>
+<aop:after method="after" pointcut-ref="pointcut"/>
+<aop:before method="before" pointcut-ref="pointcut"/>
+<aop:around method="around" pointcut-ref="pointcut"/>
+
+</aop:aspect>
+</aop:config>
+
+</beans>
